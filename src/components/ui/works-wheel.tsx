@@ -227,38 +227,8 @@ export function WorksWheel({
         role="listbox"
         aria-label={label}
         aria-activedescendant={`works-wheel-${active}`}
-        className="focus-visible:outline-neutral-900 absolute inset-0 cursor-grab touch-pan-x outline-none focus-visible:outline-2 focus-visible:-outline-offset-4 active:cursor-grabbing"
+        className="focus-visible:outline-neutral-900 absolute inset-0 touch-pan-y outline-none focus-visible:outline-2 focus-visible:-outline-offset-4"
         style={{ perspective: `${metrics.depth}px` }}
-        onPointerDown={(event) => {
-          drag.current = event.clientY;
-          event.currentTarget.setPointerCapture(event.pointerId);
-        }}
-        onPointerMove={(event) => {
-          if (drag.current === null || lockRef.current) return;
-          const delta = drag.current - event.clientY;
-          if (Math.abs(delta) > 35) {
-            if (delta > 0 && progress !== undefined) {
-              const currentStep = Math.round(progress * count);
-              if (currentStep < count) {
-                onSelectIndex?.(currentStep);
-                drag.current = event.clientY;
-                lockRef.current = true;
-                window.setTimeout(() => { lockRef.current = false; }, 380);
-              }
-            } else if (delta < 0 && progress !== undefined) {
-              const currentStep = Math.round(progress * count);
-              if (currentStep > 0) {
-                onSelectIndex?.(currentStep - 2);
-                drag.current = event.clientY;
-                lockRef.current = true;
-                window.setTimeout(() => { lockRef.current = false; }, 380);
-              }
-            }
-          }
-        }}
-        onPointerUp={() => {
-          drag.current = null;
-        }}
         onKeyDown={(event) => {
           if (event.key === "ArrowDown" && progress !== undefined) {
             const currentStep = Math.round(progress * count);

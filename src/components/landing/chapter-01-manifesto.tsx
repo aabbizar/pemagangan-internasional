@@ -74,7 +74,7 @@ export function Chapter01Manifesto() {
             />
           }
           background={
-            <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+            <div style={{ position: "absolute", inset: 0, overflow: "hidden", transform: "translateZ(0)" }}>
               {/* Pure crisp white for the letter TALENTA before scroll */}
               <div
                 style={{
@@ -83,6 +83,8 @@ export function Chapter01Manifesto() {
                   background: "linear-gradient(180deg, #FFFFFF 0%, #F0F9FF 100%)",
                   opacity: "calc(1 - var(--gp-reveal, 0))",
                   transition: "opacity 0.15s ease",
+                  transform: "translateZ(0)",
+                  willChange: "opacity",
                 }}
               />
               {/* Deep Navy LMS world revealed when zooming in */}
@@ -93,6 +95,8 @@ export function Chapter01Manifesto() {
                   background:
                     "radial-gradient(circle at 18% 10%, rgba(14,116,144,0.65), transparent 40%), radial-gradient(circle at 82% 25%, rgba(2,132,199,0.4), transparent 35%), radial-gradient(circle at 50% 80%, rgba(3,105,161,0.45), transparent 45%), linear-gradient(135deg, #041222 0%, #0A2540 50%, #020C18 100%)",
                   opacity: "var(--gp-reveal, 0)",
+                  transform: "translateZ(0)",
+                  willChange: "opacity",
                 }}
               />
             </div>
