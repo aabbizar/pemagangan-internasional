@@ -12,25 +12,25 @@ interface JourneyPhaseData {
   align: string;
 }
 
-const JOURNEY_PHASES: JourneyPhaseData[] = [
+const BENEFIT_PHASES: JourneyPhaseData[] = [
   {
     id: "I",
-    title: "PERSIAPAN",
-    desc: "Karantina intensif, pelatihan bahasa dwibahasa, dan pembentukan karakter fisik.",
+    title: "JARINGAN TERPERCAYA",
+    desc: "Telah menjalin kerja sama resmi dengan berbagai lembaga dan institusi berskala internasional yang kredibel untuk menjamin penempatan Anda.",
     img: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=85", 
     align: "left",
   },
   {
     id: "II",
-    title: "VALIDASI",
-    desc: "Uji kompetensi teknis, sertifikasi bahasa resmi, dan simulasi wawancara user (Mensetsu).",
+    title: "AKSES PENUH 1.5 JUTA",
+    desc: "Cukup dengan investasi Rp 1.500.000, Anda sudah membuka akses ke seluruh ekosistem modul pembelajaran LMS berstandar industri secara penuh.",
     img: "https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?auto=format&fit=crop&w=1200&q=85", 
     align: "right",
   },
   {
     id: "III",
-    title: "PENEMPATAN",
-    desc: "Proses birokrasi, imigrasi, dan penerbangan menuju fasilitas industri mitra di negara tujuan.",
+    title: "HYBRID 80% / 20%",
+    desc: "Kurikulum cerdas: 80% kelas online untuk penguasaan teori, dan 20% offline sebagai pemantapan praktik serta Ujian Akhir (UAS) komprehensif.",
     img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=85", 
     align: "center",
   }
@@ -97,7 +97,7 @@ function JourneyPhase({ phase, index }: { phase: JourneyPhaseData; index: number
           className="block h-[1px] bg-cyan-500/50 mb-4"
         />
         <span className="font-mono text-[10px] uppercase tracking-widest text-cyan-400 mb-3 block">
-          FASE {phase.id}
+          BENEFIT {phase.id}
         </span>
         <h3 className="font-sans font-bold text-3xl uppercase tracking-tight mb-4 text-[#E3E1DC]">
           {phase.title}
@@ -108,7 +108,7 @@ function JourneyPhase({ phase, index }: { phase: JourneyPhaseData; index: number
       </motion.div>
       
       {/* Vertical connector line (desktop only) */}
-      {index !== JOURNEY_PHASES.length - 1 && (
+      {index !== BENEFIT_PHASES.length - 1 && (
         <motion.div 
           initial={{ scaleY: 0, opacity: 0 }}
           whileInView={{ scaleY: 1, opacity: 1 }}
@@ -135,7 +135,7 @@ export function Chapter03HumanJourney() {
           >
             <div className="mb-4">
               <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-cyan-400 border border-neutral-800 bg-neutral-900/70 px-3.5 py-1.5 backdrop-blur-sm inline-block">
-                Bab 03 • Alur Transformasi
+                Bab 03 • Nilai Keunggulan
               </span>
             </div>
           </motion.div>
@@ -147,12 +147,12 @@ export function Chapter03HumanJourney() {
             viewport={{ once: false, amount: 0.5 }}
             className="font-display uppercase text-4xl sm:text-5xl md:text-7xl tracking-tight max-w-4xl leading-[0.9]"
           >
-            ALUR <br /> TRANSFORMASI
+            NILAI <br /> KEUNGGULAN
           </motion.h2>
         </header>
 
         <div className="space-y-32 md:space-y-48">
-          {JOURNEY_PHASES.map((phase, i) => (
+          {BENEFIT_PHASES.map((phase, i) => (
             <JourneyPhase key={phase.id} phase={phase} index={i} />
           ))}
         </div>
