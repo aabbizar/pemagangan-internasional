@@ -3,8 +3,10 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
+import kemnakerLogo from "../../../public/Picture1.png";
 
 /**
  * Navbar Landing — Anchor sesuai Redesign V3:
@@ -38,8 +40,8 @@ export function Navbar() {
     <>
       <nav className="fixed top-0 w-full p-6 sm:p-8 flex justify-between items-center z-50 mix-blend-difference text-white">
         <Link href="/" className="flex items-center gap-3 focus-visible:outline-none group">
-          <img
-            src="/Picture1.png"
+          <Image
+            src={kemnakerLogo}
             alt="Kemnaker Logo"
             className="h-10 w-auto object-contain brightness-0 invert"
           />
