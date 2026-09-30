@@ -21,7 +21,7 @@ const ACCEPTED_EMAIL = "admin@demo.id";
 const ACCEPTED_OTP = "123456";
 const RESEND_INTERVAL_SECONDS = 30;
 
-export function AuthForm() {
+export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => void }) {
   const router = useRouter();
   const [step, setStep] = React.useState<"email" | "otp" | "success">("email");
   const [email, setEmail] = React.useState("");
@@ -153,22 +153,6 @@ export function AuthForm() {
             </div>
 
             <form onSubmit={handleEmailSubmit} className="space-y-5" noValidate>
-              
-              {/* SSO Mock Button */}
-              <button
-                type="button"
-                className="w-full py-2.5 px-4 bg-white border border-neutral-200 rounded-lg text-neutral-700 text-sm font-medium hover:bg-neutral-50 transition-colors flex items-center justify-center gap-2 shadow-sm"
-              >
-                <ShieldCheck className="w-4 h-4 text-blue-600" />
-                <span>Masuk dengan SIAPkerja SSO</span>
-              </button>
-
-              <div className="flex items-center gap-3 py-1">
-                <div className="h-px bg-neutral-200 flex-1" />
-                <span className="text-xs text-neutral-400 font-medium">Atau</span>
-                <div className="h-px bg-neutral-200 flex-1" />
-              </div>
-
               <div className="space-y-1.5">
                 <label
                   htmlFor="email-address"
@@ -225,10 +209,20 @@ export function AuthForm() {
                 )}
               </button>
 
-              <div className="pt-2 flex items-center justify-center gap-2 text-[11px] text-muted font-mono">
-                <ShieldCheck className="w-3.5 h-3.5 text-success" />
-                <span>Arsitektur Keamanan Terenkripsi GovTech</span>
-              </div>
+              {onSwitchToRegister && (
+                <div className="pt-4 text-center">
+                  <p className="text-sm text-neutral-600">
+                    Belum memiliki akun?{" "}
+                    <button
+                      type="button"
+                      onClick={onSwitchToRegister}
+                      className="text-blue-600 font-semibold hover:underline"
+                    >
+                      Daftar Peserta
+                    </button>
+                  </p>
+                </div>
+              )}
             </form>
           </motion.div>
         )}
