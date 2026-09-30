@@ -132,7 +132,7 @@ export function AuthForm() {
   };
 
   return (
-    <div className="w-full bg-white/90 backdrop-blur-md border border-black/15 shadow-sm p-6 sm:p-8">
+    <div className="w-full">
       <AnimatePresence mode="wait">
         {/* STEP 1: EMAIL ENTRY */}
         {step === "email" && (
@@ -143,34 +143,41 @@ export function AuthForm() {
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
           >
-            <div className="mb-6 space-y-1">
-              <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#374336] font-semibold">
-                Gerbang Keamanan • Langkah 1 dari 2
-              </div>
-              <h2 className="text-xl sm:text-2xl font-bold font-display uppercase tracking-tight text-[#121212]">
-                Verifikasi Identitas
+            <div className="mb-8 space-y-2">
+              <h2 className="text-2xl sm:text-3xl font-bold font-sans text-neutral-900 tracking-tight">
+                Selamat Datang
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-600 font-light">
-                Masukkan alamat email resmi Anda untuk menerima kode akses verifikasi.
+              <p className="text-sm text-neutral-500 font-normal">
+                Verifikasi identitas untuk masuk ke dasbor operasional.
               </p>
             </div>
 
             <form onSubmit={handleEmailSubmit} className="space-y-5" noValidate>
+              
+              {/* SSO Mock Button */}
+              <button
+                type="button"
+                className="w-full py-2.5 px-4 bg-white border border-neutral-200 rounded-lg text-neutral-700 text-sm font-medium hover:bg-neutral-50 transition-colors flex items-center justify-center gap-2 shadow-sm"
+              >
+                <ShieldCheck className="w-4 h-4 text-blue-600" />
+                <span>Masuk dengan SIAPkerja SSO</span>
+              </button>
+
+              <div className="flex items-center gap-3 py-1">
+                <div className="h-px bg-neutral-200 flex-1" />
+                <span className="text-xs text-neutral-400 font-medium">Atau</span>
+                <div className="h-px bg-neutral-200 flex-1" />
+              </div>
+
               <div className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="email-address"
-                    className="block text-xs font-mono font-semibold uppercase tracking-wider text-neutral-800"
-                  >
-                    Alamat Email Resmi
-                  </label>
-                  <span className="text-[11px] font-mono text-muted">Wajib</span>
-                </div>
+                <label
+                  htmlFor="email-address"
+                  className="block text-sm font-medium text-neutral-700"
+                >
+                  Alamat Email
+                </label>
 
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-muted">
-                    <Mail className="w-4 h-4" />
-                  </div>
                   <input
                     id="email-address"
                     name="email"
@@ -183,10 +190,10 @@ export function AuthForm() {
                       setEmail(e.target.value);
                       if (emailError) setEmailError(null);
                     }}
-                    placeholder="admin@demo.id"
+                    placeholder="nama@instansi.go.id"
                     aria-invalid={!!emailError}
                     aria-describedby={emailError ? "email-error-msg" : "email-helper-msg"}
-                    className="w-full pl-10 pr-4 py-3 bg-neutral-50 border border-black/45 text-neutral-900 text-sm placeholder:text-muted focus:bg-white focus:border-[#374336] focus:ring-1 focus:ring-[#374336] transition-all outline-none"
+                    className="w-full px-4 py-2.5 bg-white border border-neutral-200 rounded-lg text-neutral-900 text-sm placeholder:text-neutral-400 focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all outline-none"
                   />
                 </div>
 
@@ -195,49 +202,26 @@ export function AuthForm() {
                     id="email-error-msg"
                     role="alert"
                     aria-live="polite"
-                    className="text-xs text-danger font-medium pt-0.5"
+                    className="text-xs text-red-500 font-medium pt-0.5"
                   >
                     {emailError}
                   </p>
-                ) : (
-                  <p id="email-helper-msg" className="text-[11px] text-muted font-mono">
-                    Verifikasi tanpa kata sandi melalui kode OTP 6-digit.
-                  </p>
-                )}
-              </div>
-
-              {/* Demo Helper Badge */}
-              <div className="p-3 bg-neutral-50 border border-neutral-200 flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 text-[#374336] shrink-0" />
-                  <span className="text-xs text-neutral-700 font-mono">Akun Demo:</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleFillDemoEmail}
-                  className="text-xs font-mono font-semibold text-[#121212] hover:bg-black/5 px-2.5 py-1 border border-black/20 transition-colors"
-                  aria-label="Isi otomatis dengan email demo admin@demo.id"
-                >
-                  admin@demo.id
-                </button>
+                ) : null}
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-3.5 px-6 bg-[#121212] text-[#E3E1DC] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#374336] transition-all flex items-center justify-center gap-2 shadow-md hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 cursor-pointer"
+                className="w-full py-2.5 px-6 mt-2 bg-blue-600 text-white font-medium text-sm rounded-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
               >
                 {isLoading ? (
-                  <span className="inline-flex items-center gap-2 font-mono text-xs">
-                    <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Memvalidasi Akun...
+                  <span className="inline-flex items-center gap-2">
+                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Memproses...
                   </span>
                 ) : (
-                  <>
-                    <span>Lanjutkan</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </>
+                  <span>Lanjutkan</span>
                 )}
               </button>
 
@@ -259,19 +243,16 @@ export function AuthForm() {
             transition={{ duration: 0.18, ease: "easeOut" }}
             className="space-y-6"
           >
-            <div className="text-center space-y-1.5">
-              <div className="w-12 h-12 bg-neutral-100 text-[#121212] border border-neutral-300 flex items-center justify-center mx-auto mb-2">
+            <div className="text-center space-y-2 mb-8">
+              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <KeyRound className="w-6 h-6" />
               </div>
-              <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#374336] font-semibold">
-                Kode Verifikasi Terkirim
-              </div>
-              <h2 className="text-xl sm:text-2xl font-bold font-display uppercase tracking-tight text-[#121212]">
-                Masukkan 6-Digit OTP
+              <h2 className="text-2xl font-bold font-sans tracking-tight text-neutral-900">
+                Masukkan Kode OTP
               </h2>
-              <p className="text-xs text-neutral-600 font-light max-w-xs mx-auto">
-                Kode verifikasi telah dikirimkan ke{" "}
-                <span className="font-semibold text-neutral-900 font-mono">{email}</span>
+              <p className="text-sm text-neutral-500 font-normal">
+                Kode 6 digit telah dikirimkan ke{" "}
+                <span className="font-semibold text-neutral-900">{email}</span>
               </p>
             </div>
 
@@ -292,7 +273,7 @@ export function AuthForm() {
                 <p
                   role="alert"
                   aria-live="polite"
-                  className="text-xs text-danger font-medium text-center mt-3"
+                  className="text-xs text-red-500 font-medium text-center mt-3"
                 >
                   {otpError}
                 </p>
@@ -300,15 +281,15 @@ export function AuthForm() {
             </div>
 
             {/* Quick Demo OTP Auto-fill */}
-            <div className="p-3 bg-neutral-50 border border-neutral-200 flex items-center justify-between gap-2">
+            <div className="p-3 bg-neutral-50 border border-neutral-200 rounded-lg flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-3.5 h-3.5 text-[#374336] shrink-0" />
-                <span className="text-xs text-neutral-700 font-mono">OTP Demo:</span>
+                <Sparkles className="w-4 h-4 text-blue-600 shrink-0" />
+                <span className="text-sm text-neutral-600">Gunakan OTP Demo:</span>
               </div>
               <button
                 type="button"
                 onClick={handleFillDemoOtp}
-                className="text-xs font-mono font-semibold text-[#121212] hover:bg-black/5 px-2.5 py-1 border border-black/20 transition-colors"
+                className="text-sm font-semibold text-neutral-900 hover:bg-neutral-200 px-3 py-1 rounded-md border border-neutral-300 transition-colors"
                 aria-label="Isi otomatis dengan kode OTP demo 123456"
               >
                 123456
@@ -316,27 +297,24 @@ export function AuthForm() {
             </div>
 
             {/* Actions & Resend Timer */}
-            <div className="space-y-3">
+            <div className="space-y-4 pt-2">
               <button
                 type="button"
                 onClick={() => handleOtpVerification(otp)}
                 disabled={isLoading || otp.length < 6}
-                className="w-full py-3.5 px-6 bg-[#121212] text-[#E3E1DC] font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#374336] transition-all flex items-center justify-center gap-2 shadow-md hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 cursor-pointer"
+                className="w-full py-2.5 px-6 bg-blue-600 text-white font-medium text-sm rounded-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
               >
                 {isLoading ? (
-                  <span className="inline-flex items-center gap-2 font-mono text-xs">
-                    <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Memverifikasi Kode...
+                  <span className="inline-flex items-center gap-2">
+                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Memverifikasi...
                   </span>
                 ) : (
-                  <>
-                    <span>Verifikasi & Masuk</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </>
+                  <span>Masuk Dasbor</span>
                 )}
               </button>
 
-              <div className="flex items-center justify-between text-xs pt-1">
+              <div className="flex items-center justify-between text-sm pt-2">
                 <button
                   type="button"
                   onClick={() => {
@@ -344,23 +322,23 @@ export function AuthForm() {
                     setOtp("");
                     setOtpError(null);
                   }}
-                  className="text-neutral-600 hover:text-neutral-900 transition-colors flex items-center gap-1 font-mono text-[11px]"
+                  className="text-neutral-500 hover:text-neutral-800 transition-colors flex items-center gap-1"
                 >
-                  <ArrowLeft className="w-3.5 h-3.5" />
-                  <span>Ganti Email</span>
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Kembali</span>
                 </button>
 
                 <button
                   type="button"
                   disabled={resendTimer > 0}
                   onClick={handleResendOtp}
-                  className="text-[#374336] hover:underline disabled:text-neutral-400 font-mono text-[11px] font-semibold transition-colors flex items-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
+                  className="text-blue-600 hover:underline disabled:text-neutral-400 font-medium transition-colors flex items-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
                 >
-                  <RotateCcw className="w-3 h-3" />
+                  <RotateCcw className="w-3.5 h-3.5" />
                   <span>
                     {resendTimer > 0
                       ? `Kirim ulang (${resendTimer}s)`
-                      : "Kirim Ulang Kode OTP"}
+                      : "Kirim Ulang"}
                   </span>
                 </button>
               </div>
@@ -376,26 +354,23 @@ export function AuthForm() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.05 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="text-center py-6 space-y-4"
+            className="text-center py-8 space-y-4"
           >
-            <div className="w-16 h-16 bg-[#121212] text-white flex items-center justify-center mx-auto shadow-sm">
-              <CheckCircle2 className="w-8 h-8 text-success-lt" />
+            <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto shadow-md mb-2">
+              <CheckCircle2 className="w-8 h-8" />
             </div>
 
-            <div className="space-y-1">
-              <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#374336] font-bold">
+            <div className="space-y-2">
+              <h2 className="text-2xl font-bold font-sans tracking-tight text-neutral-900">
                 Otorisasi Berhasil
-              </div>
-              <h2 className="text-2xl font-bold font-display uppercase tracking-tight text-[#121212]">
-                Selamat Datang
               </h2>
-              <p className="text-xs text-neutral-600 font-light">
+              <p className="text-sm text-neutral-500 font-normal">
                 Sesi administratif aktif. Mengalihkan ke workspace operasional...
               </p>
             </div>
 
-            <div className="pt-4 flex justify-center">
-              <div className="w-6 h-6 border-2 border-neutral-300 border-t-[#121212] rounded-full animate-spin" />
+            <div className="pt-6 flex justify-center">
+              <div className="w-6 h-6 border-2 border-neutral-200 border-t-blue-600 rounded-full animate-spin" />
             </div>
           </motion.div>
         )}

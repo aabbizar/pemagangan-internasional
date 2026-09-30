@@ -74,7 +74,7 @@ export function Navbar() {
             href="/login"
             className="hover:opacity-60 transition-opacity border-b border-white pb-1"
           >
-            Akses Registri
+            Login
           </Link>
         </div>
 
@@ -122,7 +122,7 @@ export function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="hover:opacity-70 transition-opacity text-base border-b border-white w-max pb-1"
               >
-                Akses Registri →
+                Login
               </Link>
             </div>
           </div>

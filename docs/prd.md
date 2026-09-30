@@ -92,12 +92,15 @@ Platform ini dibangun dengan standar GovTech modern: estetika editorial minimali
    - **Bab 02 – Standar Kompetensi & Informasi Program (Horizontal Scroll + Story Scroll FlowArt)**:
      - *Part 2A – Horizontal Scroll (21st.dev)*: 5 slide horizontal berwarna berani (Merah, Biru, Oranye, Kuning, Hijau) dengan watermark parallax teks raksasa dan ilustrasi karakter cutout.
      - *Part 2B – Story Scroll FlowArt (GSAP 3D Rotational Peeling)*: 5 tumpukan layar penuh interaktif tepat setelah slide hijau, menyajikan informasi lengkap:
-       1. Program Internship/Magang Bilateral (Orange `#fd5200`).
-       2. Jalur Bekerja Legal Specified Skilled Worker / SSW (Hitam `#000`).
-       3. Syarat Masuk & Kriteria Kualifikasi (Krem `#F5F0E8`): Skor IQ > 92, sertifikasi bahasa resmi (JLPT/Goethe/EPS-TOPIK), domisili seluruh Indonesia kecuali Makassar & Papua, program Caregiver bersertifikat (kuota 90% wanita).
-       4. Pelatihan Hybrid Luring & Daring (Biru `#1A3DE8`): Skema 80% daring via LMS + 20% karantina luring, simulasi Mensetsu, dan UAS.
-       5. Informasi Pendaftaran (Hitam `#000`): Biaya registrasi Rp 1.500.000, kuota batch terbaru, dan alur pendaftaran terpadu.
-   - **Bab 03 – Alur Transformasi Peserta (Human Journey)**: Visualisasi 3 fase perjalanan peserta (Persiapan, Validasi, Penempatan) dengan efek parallax gambar berbobot sinematik.
+       1. **Informasi Internship/Magang Bilateral** (Orange `#fd5200`): Kuota bilateral, standar industri mancanegara, dan advokasi hukum.
+       2. **Informasi Bekerja Legal SSW** (Hitam `#000`): Status legal resmi, upah global standar industri lokal, dan mitra AO teruji.
+       3. **Pelatihan Luring & Daring (Hybrid)** (Biru `#1A3DE8`): Benefit pelatihan LMS modern 80% teori dan 20% luring (pemantapan & UAS), serta informasi pendaftaran terpadu.
+       4. **Syarat Magang & Kualifikasi Umum** (Krem `#F5F0E8`): Skor IQ > 92, Sertifikasi Bahasa, Domisili seluruh Indonesia kecuali Makassar & Papua.
+       5. **Kualifikasi Khusus Caregiver** (Emerald `#052E16`): Syarat sertifikat perawat lansia, kuota terbuka pria/wanita dengan prioritas 90% wanita.
+   - **Bab 03 – Nilai Keunggulan / Benefit Eksklusif**: Visualisasi 3 benefit program secara overlap dan sinematik:
+     1. **Jaringan Terpercaya**: Integrasi institusi internasional kredibel.
+     2. **Akses Penuh 1.5 Juta**: Unlock ekosistem modul LMS dengan investasi tunggal transparan.
+     3. **Hybrid 80% / 20%**: Kurikulum cerdas online untuk teori dan offline untuk praktik & UAS komprehensif.
    - **Bab 04 – Jaringan Kemitraan Industri Global (Works Wheel)**: Roda 3D interaktif yang memutar sektor-sektor industri internasional unggulan (Otomotif, Robotika, Presisi, Semikonduktor, Kaigo, VET Jerman, dll.).
    - **Bab 05 – Tentang Kami (About 29 shadcnblock)**: Layout arsitektural bersih berlatar hitam pekat (`bg-black`), foto fasilitas modern, kartu misi dengan kutipan institusi, dan grid 3-kolom nilai utama (Transparansi Penuh, Standar Vokasi Global, Perlindungan Bilateral).
    - **Footer Kenegaraan**: Footer reveal minimalis berlatar **Live BackgroundShader** gradasi biru Kemnaker selaras dengan hero section, tautan navigasi esensial, dan hak cipta Ditjen Binalavotas.
@@ -136,7 +139,7 @@ Platform ini dibangun dengan standar GovTech modern: estetika editorial minimali
 - Navigasi tetap (fixed/sticky) dengan efek blend mode tajam (*mix-blend-difference*).
 - Logo resmi Kemnaker RI & Lembaga Pemagangan beresolusi tajam.
 - Menu navigasi menuju jangkar seksi: `#purpose` (Kualifikasi & Info), `#journey` (Alur), `#network` (Kemitraan), `#commitment` (Tentang Kami).
-- Tombol aksi cepat: "Akses Registri" (mengarahkan ke `/login`).
+- Tombol aksi cepat: "Login" (mengarahkan ke `/login`).
 
 ### FR-02: Bab 01 – Hero Portal LMS (GlyphPortal & Shader)
 - Animasi interaktif portal pembesaran huruf "TALENTA" menuju dunia pembelajaran digital LMS.
