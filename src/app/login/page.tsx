@@ -34,17 +34,15 @@ export default function LoginPage() {
       >
         
         {/* Image & Branding Side */}
-        <motion.div layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className="hidden lg:flex lg:w-[45%] relative flex-col justify-between p-12 overflow-hidden bg-blue-50/50 border-x border-blue-100/50">
+        <motion.div layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className="hidden lg:flex lg:w-[45%] relative flex-col p-12 overflow-hidden bg-[#2D4590]">
           {/* Background Illustration */}
           <Image 
             src={loginIllustration}
             alt="Kemnaker RI Login Illustration" 
             fill 
-            className="object-cover mix-blend-multiply"
+            className="object-cover"
             priority
           />
-          {/* Gradient Overlay for Text Readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/20 to-transparent" />
           
           {/* Top Logo / Title */}
           <motion.div layout="position" className="relative z-10 flex items-center gap-3">
@@ -52,32 +50,6 @@ export default function LoginPage() {
             <h2 className="text-white font-display text-2xl font-bold tracking-tight uppercase drop-shadow-md">
               Binalavotas.
             </h2>
-          </motion.div>
-
-          {/* Bottom Copy */}
-          <motion.div layout="position" className="relative z-10 space-y-4">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={isLogin ? "login-text" : "register-text"}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-              >
-                <p className="text-white/90 font-mono text-xs uppercase tracking-widest border-b border-white/30 pb-4 mb-4 inline-block">
-                  {isLogin ? "Portal Keamanan Internal" : "Registrasi Peserta Baru"}
-                </p>
-                <h3 className="text-white font-sans text-2xl leading-tight max-w-[280px]">
-                  {isLogin 
-                    ? "Akses eksklusif untuk administrator dan verifikator program pemagangan internasional."
-                    : "Mulai langkah karir internasional Anda dengan platform pemagangan resmi Kemnaker RI."}
-                </h3>
-              </motion.div>
-            </AnimatePresence>
-            <div className="flex items-center gap-2 pt-2 text-white/70 text-xs font-mono">
-              <Shield className="w-4 h-4" />
-              <span>GovTech Enforced Standard</span>
-            </div>
           </motion.div>
         </motion.div>
 

@@ -144,7 +144,7 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
             transition={{ duration: 0.18, ease: "easeOut" }}
           >
             <div className="mb-8 space-y-2">
-              <h2 className="text-2xl sm:text-3xl font-bold font-sans text-neutral-900 tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold font-sans text-neutral-900 tracking-tighter">
                 Selamat Datang
               </h2>
               <p className="text-sm text-neutral-500 font-normal">
