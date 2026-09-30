@@ -8,6 +8,8 @@ import { RegisterForm } from "@/features/auth/register-form";
 import { ArrowLeft, Shield } from "lucide-react";
 import { BackgroundShader } from "@/components/ui/background-shader";
 import { motion } from "motion/react";
+import kemnakerLogo from "../../../public/Picture1.png";
+import loginIllustration from "../../../public/images/login-illustration.jpg";
 
 export default function LoginPage() {
   const [isLogin, setIsLogin] = React.useState(true);
@@ -25,19 +27,20 @@ export default function LoginPage() {
       {/* Main Split Card */}
       <motion.div 
         layout
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={`w-full max-w-[1100px] bg-white rounded-3xl shadow-2xl overflow-hidden relative z-10 flex flex-col min-h-[650px] ${
           isLogin ? "lg:flex-row" : "lg:flex-row-reverse"
         }`}
       >
         
         {/* Image & Branding Side */}
-        <motion.div layout className="hidden lg:flex lg:w-[45%] relative flex-col justify-between p-12 overflow-hidden bg-blue-50/50 border-x border-blue-100/50">
+        <motion.div layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className="hidden lg:flex lg:w-[45%] relative flex-col justify-between p-12 overflow-hidden bg-blue-50/50 border-x border-blue-100/50">
           {/* Background Illustration */}
           <Image 
-            src="/images/login-illustration.jpg" 
+            src={loginIllustration}
             alt="Kemnaker RI Login Illustration" 
             fill 
-            className="object-cover opacity-90 mix-blend-multiply"
+            className="object-cover mix-blend-multiply"
             priority
           />
           {/* Gradient Overlay for Text Readability */}
@@ -45,7 +48,7 @@ export default function LoginPage() {
           
           {/* Top Logo / Title */}
           <motion.div layout="position" className="relative z-10 flex items-center gap-3">
-            <Image src="/Picture1.png" alt="Logo Kemnaker" width={40} height={40} className="w-10 h-auto drop-shadow-md" />
+            <Image src={kemnakerLogo} alt="Logo Kemnaker" width={40} height={40} className="w-10 h-auto drop-shadow-md" />
             <h2 className="text-white font-display text-2xl font-bold tracking-tight uppercase drop-shadow-md">
               Binalavotas.
             </h2>
@@ -69,7 +72,7 @@ export default function LoginPage() {
         </motion.div>
 
         {/* Form Side */}
-        <motion.div layout className="w-full lg:w-[55%] p-8 sm:p-12 md:p-16 flex flex-col justify-center relative bg-white">
+        <motion.div layout transition={{ type: "spring", stiffness: 300, damping: 30 }} className="w-full lg:w-[55%] p-8 sm:p-12 md:p-16 flex flex-col justify-center relative bg-white">
           {/* Back Button for Mobile (Desktop can use a different placement or keep it here) */}
           <Link
             href="/"
