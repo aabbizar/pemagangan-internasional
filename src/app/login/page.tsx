@@ -7,7 +7,7 @@ import { AuthForm } from "@/features/auth/auth-form";
 import { RegisterForm } from "@/features/auth/register-form";
 import { ArrowLeft, Shield } from "lucide-react";
 import { BackgroundShader } from "@/components/ui/background-shader";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import kemnakerLogo from "../../../public/Picture1.png";
 import loginIllustration from "../../../public/images/login-illustration.jpg";
 
@@ -56,14 +56,24 @@ export default function LoginPage() {
 
           {/* Bottom Copy */}
           <motion.div layout="position" className="relative z-10 space-y-4">
-            <p className="text-white/90 font-mono text-xs uppercase tracking-widest border-b border-white/30 pb-4 inline-block">
-              {isLogin ? "Portal Keamanan Internal" : "Registrasi Peserta Baru"}
-            </p>
-            <h3 className="text-white font-sans text-2xl leading-tight max-w-[280px]">
-              {isLogin 
-                ? "Akses eksklusif untuk administrator dan verifikator program pemagangan internasional."
-                : "Mulai langkah karir internasional Anda dengan platform pemagangan resmi Kemnaker RI."}
-            </h3>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={isLogin ? "login-text" : "register-text"}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                <p className="text-white/90 font-mono text-xs uppercase tracking-widest border-b border-white/30 pb-4 mb-4 inline-block">
+                  {isLogin ? "Portal Keamanan Internal" : "Registrasi Peserta Baru"}
+                </p>
+                <h3 className="text-white font-sans text-2xl leading-tight max-w-[280px]">
+                  {isLogin 
+                    ? "Akses eksklusif untuk administrator dan verifikator program pemagangan internasional."
+                    : "Mulai langkah karir internasional Anda dengan platform pemagangan resmi Kemnaker RI."}
+                </h3>
+              </motion.div>
+            </AnimatePresence>
             <div className="flex items-center gap-2 pt-2 text-white/70 text-xs font-mono">
               <Shield className="w-4 h-4" />
               <span>GovTech Enforced Standard</span>
