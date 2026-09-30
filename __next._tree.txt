@@ -1,2 +1,2 @@
-:HL["/pemagangan-internasional/_next/static/chunks/0tkjd1e1rnpgp.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"ltJxRiJ5jHk4xmI-KC8Fa"}
+:HL["/pemagangan-internasional/_next/static/chunks/17sbd--49cnhc.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}},"staleTime":300,"buildId":"QWo1x2w98zSMl_uN-4I4o"}
