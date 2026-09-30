@@ -66,25 +66,12 @@ export function RegisterForm({ onSwitchToLogin }: { onSwitchToLogin: () => void 
             transition={{ duration: 0.18, ease: "easeOut" }}
           >
             <div className="mb-6 space-y-2">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-medium">
-                <GraduationCap className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Registrasi Mandiri Calon Peserta</span>
-              </div>
-
               <h2 className="text-3xl sm:text-4xl font-extrabold font-sans text-neutral-900 tracking-tighter">
                 Daftar Peserta
               </h2>
               <p className="text-sm text-neutral-500 font-normal">
                 Buat akun untuk memulai tahapan magang internasional bilateral.
               </p>
-            </div>
-
-            {/* Clear RBAC Notice */}
-            <div className="mb-5 p-3 rounded-xl bg-neutral-50 border border-neutral-200/80 flex items-start gap-2.5 text-xs text-neutral-600 leading-relaxed font-light">
-              <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
-              <span>
-                <strong>Perhatian:</strong> Formulir registrasi publik ini khusus untuk <strong>Kandidat Peserta Magang</strong>. Akun <strong>Super Admin</strong> tidak dapat didaftarkan mandiri dan dikonfigurasi langsung oleh developer/sistem.
-              </span>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-3.5" noValidate>

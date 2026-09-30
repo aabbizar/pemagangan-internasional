@@ -165,10 +165,6 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
             transition={{ duration: 0.18, ease: "easeOut" }}
           >
             <div className="mb-6 space-y-2">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-mono font-medium">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Portal Autentikasi 2 Level</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold font-sans text-neutral-900 tracking-tighter">
                 Masuk Dasbor
               </h2>
@@ -248,14 +244,6 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
                     {emailError}
                   </p>
                 ) : null}
-              </div>
-
-              {/* RBAC Governance Note */}
-              <div className="p-3 rounded-lg bg-blue-50/70 border border-blue-100 flex items-start gap-2 text-xs text-blue-900 font-light leading-relaxed">
-                <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
-                <span>
-                  <strong>Akses RBAC:</strong> Akun Super Admin diterbitkan langsung oleh developer. Calon peserta magang dapat mendaftar mandiri melalui formulir registrasi.
-                </span>
               </div>
 
               {/* Submit Button */}

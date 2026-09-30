@@ -46,7 +46,7 @@ export default function LoginPage() {
           
           {/* Top Logo / Title */}
           <motion.div layout="position" className="relative z-10 flex items-center gap-3">
-            <Image src={kemnakerLogo} alt="Logo Kemnaker" width={40} height={40} className="w-10 h-auto drop-shadow-md" />
+            <Image src={kemnakerLogo} alt="Logo Kemnaker" width={40} height={40} className="w-10 h-auto drop-shadow-md brightness-0 invert" />
             <h2 className="text-white font-display text-2xl font-bold tracking-tight uppercase drop-shadow-md">
               Binalavotas.
             </h2>
