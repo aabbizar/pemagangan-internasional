@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* =====================================================================
+ * AETHEREAL DESIGN TOKENS — LEMBAGA PEMAGANGAN INTERNASIONAL
+ * =====================================================================
+ * PALET:
+ *   --c-bg:        #E3E1DC   Stone Concrete
+ *   --c-dark:      #121212   Deep Charcoal
+ *   --c-navy:      #0A1C33   Sovereign Navy
+ *   --c-cyan:      #06B6D4   Precision Cyan
+ *
+ * TIPOGRAFI:
+ *   --font-display: 'Helvetica Neue', 'Geist', 'Manrope', sans-serif
+ *   --font-body:    'Helvetica Neue', 'Geist', 'Manrope', sans-serif
+ * ===================================================================== */
+
+:root {
+  --c-bg: #E3E1DC;
+  --c-dark: #121212;
+  --c-navy: #0A1C33;
+  --c-cyan: #06B6D4;
+  --c-surface: #121212;
+  --c-muted: #666666;
+  --c-border: rgba(0, 0, 0, 0.1);
+
+  --font-display: 'Helvetica Neue', 'Geist', 'Manrope', sans-serif;
+  --font-body: 'Helvetica Neue', 'Geist', 'Manrope', sans-serif;
+
+  --primary: #121212;
+  --primary-foreground: #E3E1DC;
+  --secondary: #0A1C33;
+  --secondary-foreground: #E3E1DC;
+  --accent: #06B6D4;
+  --accent-foreground: #121212;
+  --background: #E3E1DC;
+  --foreground: #121212;
+  --muted: #666666;
+  --border: rgba(0, 0, 0, 0.1);
+  --ring: #06B6D4;
+
+  /* Status Fungsional */
+  --c-success: #15803D;
+  --c-warning: #B45309;
+  --c-danger: #B91C1C;
+}
+
+/* --- TAILWIND v4 THEME --- */
+@theme {
+  --color-stone: #E3E1DC;
+  --color-ink: #121212;
+  --color-navy: #0A1C33;
+  --color-cyan: #06B6D4;
+
+  --color-primary: #121212;
+  --color-secondary: #0A1C33;
+  --color-accent: #06B6D4;
+  --color-background: #E3E1DC;
+  --color-dark: #121212;
+  --color-foreground: #121212;
+  --color-border: rgba(0, 0, 0, 0.1);
+
+  --font-display: 'Helvetica Neue', 'Geist', 'Manrope', sans-serif;
+  --font-sans: 'Helvetica Neue', 'Geist', 'Manrope', sans-serif;
+  --font-mono: monospace;
+}
+
+html {
+  scroll-behavior: auto; /* Handled smoothly by Lenis */
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--c-bg);
+  color: var(--c-dark);
+  font-family: var(--font-body);
+  margin: 0;
+  overflow-x: hidden;
+  cursor: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- TYPOGRAPHY --- */
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* --- ANCHOR OFFSET --- */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* --- NOISE --- */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* --- LAYOUT UTILS --- */
+.wrapper {
+  position: relative;
+  z-index: 10;
+  background-color: var(--c-bg);
+  /* The margin ensures we can scroll "past" the content to reveal the footer */
+  margin-bottom: 100vh;
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
+}
+
+/* --- TEXT REVEAL UTILS --- */
+.word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+}
+
+.word-inner {
+  display: inline-block;
+  transform: translateY(110%);
+}
+
+/* --- PRELOADER --- */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: #121212;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.loader-text {
+  font-family: var(--font-display);
+  font-size: 5vw;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.loader-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: #1D4ED8;
+  width: 0%;
+}
+
+/* --- CARD STACK SECTION --- */
+.stack-section {
+  padding: 10vh 0;
+  background: var(--c-dark);
+  color: #E3E1DC;
+  position: relative;
+}
+
+.stack-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  padding-bottom: 10vh;
+}
+
+.card-item {
+  position: sticky;
+  top: 10vh; /* Cards stick here */
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5vh;
+}
+
+.card-inner {
+  width: 90%;
+  height: 100%;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.15fr 1.25fr;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+.card-content {
+  padding: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #1a1a1a;
+  z-index: 2;
+}
+
+.card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s ease;
+}
+
+.card-inner:hover .card-img {
+  transform: scale(1.08);
+}
+
+/* Mobile adjustment */
+@media (max-width: 768px) {
+  .card-inner {
+    grid-template-columns: 1fr;
+  }
+  .card-item {
+    top: 5vh;
+    height: 85vh;
+  }
+  .card-img-wrap {
+    height: 45%;
+    order: -1;
+  }
+  .card-content {
+    padding: 1.75rem;
+  }
+}
+
+/* --- FOOTER REVEAL --- */
+.footer-sticky {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  background: #111;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--c-blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

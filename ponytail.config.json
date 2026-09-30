@@ -1,0 +1,56 @@
+{
+  "$schema": "https://ponytail.dev/schema.json",
+  "name": "pemagangan_paasep",
+  "version": "1.0.0",
+  "organization": "Direktorat Bina Talenta Vokasi - Kementerian Ketenagakerjaan RI",
+  "domain": "International Vocational Internship Platform (PoC)",
+  "contextFiles": [
+    "docs/prd.md",
+    "docs/poc.md",
+    "docs/sitemap.md",
+    "docs/user-flow.md",
+    "docs/aethereal-redesign.md",
+    "docs/design-system.md",
+    "docs/frontend-architecture.md"
+  ],
+  "designSystem": {
+    "sourceOfTruth": "docs/aethereal-redesign.md + docs/design-system.md (Notis Kanonis AETHEREAL)",
+    "tokens": {
+      "primary": "#121212",
+      "secondary": "#374336",
+      "accent": "#374336",
+      "background": "#E3E1DC",
+      "surface": "#FFFFFF",
+      "text": "#121212",
+      "textMuted": "#666666",
+      "border": "rgba(0, 0, 0, 0.1)",
+      "onDark": "#E3E1DC",
+      "darkSurface": "#121212"
+    },
+    "typography": {
+      "primary": "Syncopate",
+      "body": "Manrope",
+      "mono": "monospace",
+      "fallback": "sans-serif"
+    },
+    "shape": {
+      "radius": "0 (sharp) — tanpa rounded-2xl, tanpa pill kecuali badge kecil",
+      "border": "1px hairline border-black/10 - border-black/15",
+      "shadow": "shadow-sm / shadow-2xs maksimal, tanpa shadow tebal"
+    },
+    "voice": "Bahasa Indonesia, label memakai font-mono uppercase tracking lebar",
+    "principles": [
+      "No AI slop",
+      "No generic bootstrap or SaaS templates",
+      "Editorial, sovereign government-tech aesthetic (monumental brutalist + editorial polish)",
+      "Strict WCAG 2.1 AA accessibility",
+      "JANGAN memakai palet legacy #0A2342 / #1D4ED8 / #06B6D4 / #FFFFFF / #F8FAFC / Geist Sans",
+      "JANGAN memakai gaya slate-200 rounded-2xl shadow-2xs ala template SaaS"
+    ]
+  },
+  "phases": {
+    "current": "Fase A+B: konsolidasi design token AETHEREAL + fondasi (UI kit, route guard, a11y, lint 0 error)",
+    "next": "Fase C: rombak /participants /programs /reports /settings ke AETHEREAL + data simulasi",
+    "roadmap": "Phase 2 (Q4 2026): SIAPkerja OIDC, PostgreSQL PDN, dokumentasi multi-step, portal SO"
+  }
+}
