@@ -1,2 +1,2 @@
-:HL["/pemagangan-internasional/_next/static/chunks/1jkfq84dlvifn.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"apps","param":null,"prefetchHints":4192,"slots":{"children":{"name":"inventory","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"r_RijiIUHi30h4KEINI1P"}
+:HL["/pemagangan-internasional/_next/static/chunks/08nmynv76p3ko.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"apps","param":null,"prefetchHints":4192,"slots":{"children":{"name":"inventory","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"rKaz_pKFbzOhMTufbvrik"}
