@@ -15,6 +15,7 @@
 
 export interface SimulatedAuthSession {
   email: string;
+  name?: string;
   role: string;
   authenticatedAt: string;
   isAuthenticated: boolean;
@@ -57,10 +58,11 @@ export const authSessionStore = {
     return inMemorySession;
   },
 
-  setSession: (email: string, role = "Administrator Verifikator"): void => {
+  setSession: (email: string, role = "Administrator Verifikator", name?: string): void => {
     hydrate();
     inMemorySession = {
       email,
+      name,
       role,
       authenticatedAt: new Date().toISOString(),
       isAuthenticated: true,

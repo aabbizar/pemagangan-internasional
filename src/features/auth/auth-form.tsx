@@ -15,9 +15,12 @@ import {
   CheckCircle2,
   Sparkles,
   ArrowLeft,
+  UserCheck,
+  ShieldAlert,
 } from "lucide-react";
 
-const ACCEPTED_EMAIL = "admin@demo.id";
+const ADMIN_EMAILS = ["superadmin@kemnaker.go.id", "admin@demo.id"];
+const DEMO_PESERTA_EMAIL = "peserta@demo.id";
 const ACCEPTED_OTP = "123456";
 const RESEND_INTERVAL_SECONDS = 30;
 
@@ -30,6 +33,8 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
   const [resendTimer, setResendTimer] = React.useState(RESEND_INTERVAL_SECONDS);
   const [emailError, setEmailError] = React.useState<string | null>(null);
   const [otpError, setOtpError] = React.useState<string | null>(null);
+
+  const isAdmin = ADMIN_EMAILS.includes(email.trim().toLowerCase());
 
   // 30s Mock Countdown Timer for OTP resend
   React.useEffect(() => {
@@ -57,15 +62,6 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
       return;
     }
 
-    if (trimmedEmail.toLowerCase() !== ACCEPTED_EMAIL.toLowerCase()) {
-      const err = `Email simulasi belum terdaftar. Gunakan ${ACCEPTED_EMAIL}`;
-      setEmailError(err);
-      toast.error("Akun Tidak Ditemukan", {
-        description: `Gunakan akun demo: ${ACCEPTED_EMAIL}`,
-      });
-      return;
-    }
-
     setIsLoading(true);
 
     setTimeout(() => {
@@ -75,7 +71,7 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
       toast.success("Kode Verifikasi Terkirim", {
         description: `Kode 6-digit dikirim ke ${trimmedEmail} (Kode Demo: 123456)`,
       });
-    }, 600);
+    }, 500);
   };
 
   // STEP 2: Handle OTP Verification
@@ -93,15 +89,34 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
     setTimeout(() => {
       setIsLoading(false);
       if (submittedOtp === ACCEPTED_OTP) {
-        authSessionStore.setSession(email.trim(), "Administrator Verifikator");
+        const isSuperAdmin = ADMIN_EMAILS.includes(email.trim().toLowerCase());
+
+        if (isSuperAdmin) {
+          authSessionStore.setSession(
+            email.trim(),
+            "Super Administrator",
+            "Super Admin Verifikator"
+          );
+        } else {
+          authSessionStore.setSession(
+            email.trim(),
+            "Peserta Magang",
+            "Budi Santoso"
+          );
+        }
 
         setStep("success");
+        const destination = isSuperAdmin ? "Dashboard Super Admin" : "Portal Peserta Magang";
         toast.success("Verifikasi Berhasil", {
-          description: "Mengarahkan ke Dashboard Pemagangan...",
+          description: `Mengarahkan ke ${destination}...`,
         });
 
         setTimeout(() => {
-          router.push("/dashboard");
+          if (isSuperAdmin) {
+            router.push("/dashboard");
+          } else {
+            router.push("/dashboard/peserta");
+          }
         }, 900);
       } else {
         const err = "Kode OTP tidak cocok. Gunakan kode demo: 123456";
@@ -121,14 +136,20 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
     });
   };
 
-  const handleFillDemoEmail = () => {
-    setEmail(ACCEPTED_EMAIL);
+  const handleFillAdminEmail = () => {
+    setEmail("superadmin@kemnaker.go.id");
     setEmailError(null);
+    toast.info("Kredensial Super Admin Terisi", {
+      description: "Akun Super Admin disediakan langsung oleh developer/sistem.",
+    });
   };
 
-  const handleFillDemoOtp = () => {
-    setOtp(ACCEPTED_OTP);
-    setOtpError(null);
+  const handleFillPesertaEmail = () => {
+    setEmail(DEMO_PESERTA_EMAIL);
+    setEmailError(null);
+    toast.info("Kredensial Peserta Magang Terisi", {
+      description: "Akun peserta magang terdaftar (Budi Santoso).",
+    });
   };
 
   return (
@@ -143,16 +164,52 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
           >
-            <div className="mb-8 space-y-2">
+            <div className="mb-6 space-y-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-mono font-medium">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Portal Autentikasi 2 Level</span>
+              </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold font-sans text-neutral-900 tracking-tighter">
-                Selamat Datang
+                Masuk Dasbor
               </h2>
               <p className="text-sm text-neutral-500 font-normal">
-                Verifikasi identitas untuk masuk ke dasbor operasional.
+                Akses workspace Super Admin atau portal kandidat magang Anda.
               </p>
             </div>
 
-            <form onSubmit={handleEmailSubmit} className="space-y-5" noValidate>
+            {/* Quick Demo Autofill Chips */}
+            <div className="mb-6 p-3.5 rounded-xl bg-neutral-50 border border-neutral-200/80 space-y-2.5">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 block font-semibold">
+                Pilih Akun Cepat (Testing PoC):
+              </span>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <button
+                  type="button"
+                  onClick={handleFillAdminEmail}
+                  className="flex-1 px-3 py-2 rounded-lg bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 text-indigo-800 text-xs font-mono text-left transition-colors flex items-center justify-between cursor-pointer"
+                >
+                  <div className="truncate">
+                    <span className="font-bold block">👑 Super Admin</span>
+                    <span className="text-[10px] text-indigo-600 truncate block">superadmin@kemnaker.go.id</span>
+                  </div>
+                  <span className="text-[10px] font-mono bg-indigo-200/60 px-1.5 py-0.5 rounded text-indigo-900 shrink-0 ml-1">Pilih</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleFillPesertaEmail}
+                  className="flex-1 px-3 py-2 rounded-lg bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 text-emerald-800 text-xs font-mono text-left transition-colors flex items-center justify-between cursor-pointer"
+                >
+                  <div className="truncate">
+                    <span className="font-bold block">🎓 Peserta Magang</span>
+                    <span className="text-[10px] text-emerald-600 truncate block">peserta@demo.id</span>
+                  </div>
+                  <span className="text-[10px] font-mono bg-emerald-200/60 px-1.5 py-0.5 rounded text-emerald-900 shrink-0 ml-1">Pilih</span>
+                </button>
+              </div>
+            </div>
+
+            <form onSubmit={handleEmailSubmit} className="space-y-4" noValidate>
               <div className="space-y-1.5">
                 <label
                   htmlFor="email-address"
@@ -174,7 +231,7 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
                       setEmail(e.target.value);
                       if (emailError) setEmailError(null);
                     }}
-                    placeholder="nama@instansi.go.id"
+                    placeholder="nama@instansi.go.id atau peserta@email.com"
                     aria-invalid={!!emailError}
                     aria-describedby={emailError ? "email-error-msg" : "email-helper-msg"}
                     className="w-full px-4 py-2.5 bg-white border border-neutral-200 rounded-lg text-neutral-900 text-sm placeholder:text-neutral-400 focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all outline-none"
@@ -193,6 +250,14 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
                 ) : null}
               </div>
 
+              {/* RBAC Governance Note */}
+              <div className="p-3 rounded-lg bg-blue-50/70 border border-blue-100 flex items-start gap-2 text-xs text-blue-900 font-light leading-relaxed">
+                <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                <span>
+                  <strong>Akses RBAC:</strong> Akun Super Admin diterbitkan langsung oleh developer. Calon peserta magang dapat mendaftar mandiri melalui formulir registrasi.
+                </span>
+              </div>
+
               {/* Submit Button */}
               <button
                 type="submit"
@@ -205,20 +270,20 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
                     Memproses...
                   </span>
                 ) : (
-                  <span>Lanjutkan</span>
+                  <span>Lanjutkan ke Verifikasi OTP</span>
                 )}
               </button>
 
               {onSwitchToRegister && (
-                <div className="pt-4 text-center">
+                <div className="pt-3 text-center">
                   <p className="text-sm text-neutral-600">
-                    Belum memiliki akun?{" "}
+                    Belum memiliki akun peserta?{" "}
                     <button
                       type="button"
                       onClick={onSwitchToRegister}
-                      className="text-blue-600 font-semibold hover:underline"
+                      className="text-blue-600 font-semibold hover:underline cursor-pointer"
                     >
-                      Daftar Peserta
+                      Daftar Akun Peserta
                     </button>
                   </p>
                 </div>
@@ -237,105 +302,83 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
             transition={{ duration: 0.18, ease: "easeOut" }}
             className="space-y-6"
           >
-            <div className="text-center space-y-2 mb-8">
-              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="text-center space-y-2 mb-6">
+              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
                 <KeyRound className="w-6 h-6" />
               </div>
               <h2 className="text-2xl font-bold font-sans tracking-tight text-neutral-900">
                 Masukkan Kode OTP
               </h2>
               <p className="text-sm text-neutral-500 font-normal">
-                Kode 6 digit telah dikirimkan ke{" "}
+                Kode 6-digit telah dikirimkan ke{" "}
                 <span className="font-semibold text-neutral-900">{email}</span>
               </p>
+              <div className="inline-block mt-1">
+                <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full font-semibold">
+                  Kode Demo: 123456
+                </span>
+              </div>
             </div>
 
-            {/* OTP Input Component */}
-            <div className="py-2 flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center gap-4">
               <InputOtp
+                maxLength={6}
                 value={otp}
                 onChange={(val) => {
                   setOtp(val);
                   if (otpError) setOtpError(null);
+                  if (val.length === 6) {
+                    handleOtpVerification(val);
+                  }
                 }}
-                maxLength={6}
-                autoFocus
                 disabled={isLoading}
               />
 
               {otpError && (
-                <p
-                  role="alert"
-                  aria-live="polite"
-                  className="text-xs text-red-500 font-medium text-center mt-3"
-                >
+                <p className="text-xs text-red-500 font-medium text-center">
                   {otpError}
                 </p>
               )}
-            </div>
 
-            {/* Quick Demo OTP Auto-fill */}
-            <div className="p-3 bg-neutral-50 border border-neutral-200 rounded-lg flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-blue-600 shrink-0" />
-                <span className="text-sm text-neutral-600">Gunakan OTP Demo:</span>
-              </div>
               <button
                 type="button"
-                onClick={handleFillDemoOtp}
-                className="text-sm font-semibold text-neutral-900 hover:bg-neutral-200 px-3 py-1 rounded-md border border-neutral-300 transition-colors"
-                aria-label="Isi otomatis dengan kode OTP demo 123456"
+                onClick={() => {
+                  setOtp(ACCEPTED_OTP);
+                  handleOtpVerification(ACCEPTED_OTP);
+                }}
+                className="text-xs font-mono text-blue-600 hover:underline cursor-pointer"
               >
-                123456
+                Isi Otomatis OTP (123456)
               </button>
             </div>
 
-            {/* Actions & Resend Timer */}
-            <div className="space-y-4 pt-2">
+            <div className="pt-2 flex items-center justify-between text-sm">
               <button
                 type="button"
-                onClick={() => handleOtpVerification(otp)}
-                disabled={isLoading || otp.length < 6}
-                className="w-full py-2.5 px-6 bg-blue-600 text-white font-medium text-sm rounded-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
+                onClick={() => {
+                  setStep("email");
+                  setOtp("");
+                  setOtpError(null);
+                }}
+                className="text-neutral-500 hover:text-neutral-800 transition-colors flex items-center gap-1 cursor-pointer"
               >
-                {isLoading ? (
-                  <span className="inline-flex items-center gap-2">
-                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Memverifikasi...
-                  </span>
-                ) : (
-                  <span>Masuk Dasbor</span>
-                )}
+                <ArrowLeft className="w-4 h-4" />
+                <span>Ganti Email</span>
               </button>
 
-              <div className="flex items-center justify-between text-sm pt-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setStep("email");
-                    setOtp("");
-                    setOtpError(null);
-                  }}
-                  className="text-neutral-500 hover:text-neutral-800 transition-colors flex items-center gap-1"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>Kembali</span>
-                </button>
-
-                <button
-                  type="button"
-                  disabled={resendTimer > 0}
-                  onClick={handleResendOtp}
-                  className="text-blue-600 hover:underline disabled:text-neutral-400 font-medium transition-colors flex items-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                  <span>
-                    {resendTimer > 0
-                      ? `Kirim ulang (${resendTimer}s)`
-                      : "Kirim Ulang"}
-                  </span>
-                </button>
-              </div>
+              <button
+                type="button"
+                disabled={resendTimer > 0}
+                onClick={handleResendOtp}
+                className="text-blue-600 hover:underline disabled:text-neutral-400 font-medium transition-colors flex items-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>
+                  {resendTimer > 0
+                    ? `Kirim ulang (${resendTimer}s)`
+                    : "Kirim Ulang"}
+                </span>
+              </button>
             </div>
           </motion.div>
         )}
@@ -359,11 +402,11 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
                 Otorisasi Berhasil
               </h2>
               <p className="text-sm text-neutral-500 font-normal">
-                Sesi administratif aktif. Mengalihkan ke workspace operasional...
+                Sesi {isAdmin ? "Super Admin" : "Peserta Magang"} aktif. Mengalihkan ke dashboard...
               </p>
             </div>
 
-            <div className="pt-6 flex justify-center">
+            <div className="pt-4 flex justify-center">
               <div className="w-6 h-6 border-2 border-neutral-200 border-t-blue-600 rounded-full animate-spin" />
             </div>
           </motion.div>
@@ -372,3 +415,5 @@ export function AuthForm({ onSwitchToRegister }: { onSwitchToRegister?: () => vo
     </div>
   );
 }
+
+export default AuthForm;
