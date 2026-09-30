@@ -140,15 +140,8 @@ export default function GlyphPortal({
     let fontDirty = true;
 
     glyph.style.fontFamily = fontFamily;
-    const computedFamily = getComputedStyle(glyph).fontFamily;
-    const families = computedFamily.match(/(?:[^,"']+|"[^"]*"|'[^']*')+/g) ?? [];
-    const available = families.filter((family) => {
-      try { return document.fonts.check(`${weight} 100px ${family.trim()}`, text); }
-      catch { return false; }
-    });
-    glyph.style.fontFamily = [...available, DEFAULT_FONT].join(",");
-    stalled = available.length < families.length;
-
+    // Remove aggressive font-checking that breaks iPads. The browser will natively fallback.
+    stalled = false;
     const readInk = () => {
       if (!context) return false;
       const font = getComputedStyle(glyph);
